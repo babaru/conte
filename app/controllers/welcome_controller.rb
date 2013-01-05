@@ -16,7 +16,7 @@ class WelcomeController < ApplicationController
       redirect_to :index and return
     rescue OAuth2::Error => e
       Rails.logger.info "error"
-      Rails.logger.info e.response
+      Rails.logger.info e.response.status
     end
   end
 end
