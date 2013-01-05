@@ -38,5 +38,5 @@ production:
   database: conte_production
   pool: 5
   username: root
-  password:
-  socket: /tmp/mysql.sock
+  password: Mbi800716
+  socket: /var/run/mysqld/mysqld.sock
