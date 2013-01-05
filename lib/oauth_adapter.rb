@@ -37,6 +37,6 @@ class OauthAdapter
     request_data[:code] = code
     request_data[:redirect_uri] = redirect_uri
 
-    JSON.parse RestClient.get("#{api_url}/access_token", request_data)
+    JSON.parse RestClient.post("#{api_url}/access_token", request_data)
   end
 end

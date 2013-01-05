@@ -22,7 +22,7 @@ role :web, domain                          # Your HTTP server, Apache/etc
 role :app, domain                          # This may be the same as your `Web` server
 role :db,  domain, :primary => true # This is where Rails migrations will run
 
-set :deploy_to, "~/www_root/conte.sptida.com/rails"
+set :deploy_to, "/home/app/www_root/conte.sptida.com/rails"
 
 set :use_sudo, false
 

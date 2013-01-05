@@ -38,6 +38,7 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 
 gem 'rest-client'
+gem 'oauth2'
 
 # To use debugger
 # gem 'debugger'
