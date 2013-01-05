@@ -12,7 +12,7 @@ module Oauth2
     end
 
     def get_token(code, redirect_uri)
-      @oauth2_token = oauth2_client.auth_code.get_token(code, {redirect_uri:redirect_uri, parse:json})
+      @oauth2_token = oauth2_client.auth_code.get_token(code, {:redirect_uri => redirect_uri, :parse => :json})
       @oauth2_token
     end
   end
