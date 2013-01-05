@@ -13,6 +13,7 @@ class WelcomeController < ApplicationController
     begin
       token = client.auth_code.get_token(code, :redirect_uri => 'http://conte.sptida.com')
       Rails.logger.debug token.token
+      redirect_to :index
     rescue OAuth2::Error => e
       Rails.logger.debug e.code
     end
