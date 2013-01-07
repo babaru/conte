@@ -1,0 +1,14 @@
+defaults: &defaults
+  auth_types:
+    none: 0
+    sina_weibo_oauth2: 1
+
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -10,10 +10,25 @@ class Planet < ActiveRecord::Base
     auth_client.get_token code, host
   end
 
+  class << self
+    def auth_types
+      AuthType.auth_types.map{ |k,v| [I18n.t("auth_types.#{k}"),v] }
+    end 
+
+    def auth_type_names
+      Hash[AuthType.auth_types.map{ |k, v| [v, I18n.t("auth_types.#{k}")]}]
+    end
+  end
+
   private
 
   def auth_client
-    Oauth2::SinaOauth2.new(app_key, app_secret)
+    case self.auth_type
+    when AuthType.auth_types.sina_weibo_oauth2
+      Oauth2::SinaOauth2.new(app_key, app_secret)
+    else
+      nil
+    end
   end
 
 end

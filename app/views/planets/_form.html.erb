@@ -3,6 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
+    <%= f.input :auth_type, :collection => Planet.auth_types, :default => AuthType.auth_types.none %>
     <%= f.input :app_key %>
     <%= f.input :app_secret %>
   </div>

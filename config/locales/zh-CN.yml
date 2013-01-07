@@ -20,4 +20,7 @@ zh-CN:
     delete: 确定要删除这个条目吗？
   navigation:
     dashboard: 控制台
-    platforms: 社交平台
+    content: 内容发布
+  auth_types:
+    none: 无
+    sina_weibo_oauth2: 新浪微博OAuth2认证
