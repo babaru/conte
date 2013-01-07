@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+sys_admin = User.create(email: 'admin@sptida.com', password: '123456', password_confirmation: '123456')
+sys_admin_role = Role.create(name: 'sys_admin')
+sys_admin.roles << sys_admin_role

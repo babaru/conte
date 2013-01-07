@@ -12,5 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require bootstrap
+//= require wice_grid
+
+$(document).ready(function() {
+  $("a[rel=popover]").popover();
+  $(".tooltip").tooltip();
+  $("a[rel=tooltip]").tooltip();
+  $('.dropdown-toggle').dropdown();
+});

@@ -15,6 +15,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   gem 'bootstrap-sass', '~> 2.2.2.0'
+  gem 'font-awesome-sass-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -23,6 +24,18 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'settingslogic'
+gem 'rails-i18n'
+
+gem 'simple_form'
+gem 'kaminari'
+gem 'simple-navigation'
+gem 'simple-navigation-bootstrap'
+gem 'wice_grid'
+
+gem 'devise'
+gem 'cancan'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

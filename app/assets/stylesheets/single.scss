@@ -1,0 +1,46 @@
+//= require base
+
+body {
+  padding-top: 120px;
+  color: #444;
+
+  #logo {
+    height: 200px;
+    background: image-url('login_logo.png') no-repeat center center;
+  }
+
+  #page {
+    width: 960px;
+    margin:auto;
+    clear:both;
+
+    #main {
+      padding-top: 30px;
+    }
+  }
+
+  .form-inputs {
+    padding-top: 20px;
+    padding-bottom: 10px;
+
+    input {
+      font-size: 16px;
+      height: 30px;
+      width: 20em;
+    }
+  }
+
+  .form-actions {
+    background: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+
+    .control-group.boolean .controls {
+      position: relative;
+      top: -25px;
+      left: -20px;
+    }
+  }
+}
+

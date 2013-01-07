@@ -1,0 +1,17 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span8">
+      <h2><%= t("model.show", :model => Planet.model_name.human) %></h2>
+    </div>
+
+    <div class="btn-group pull-right">
+
+    </div>
+
+  </div>
+</div> 
+
+<p id="notice"><%= notice %></p>
+
+
+<%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Planet)}", planets_path %>

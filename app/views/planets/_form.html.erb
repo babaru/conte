@@ -1,0 +1,13 @@
+<%= simple_form_for(@planet, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :app_key %>
+    <%= f.input :app_secret %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %> <input type="reset" value="<%= t("buttons.reset_form")%>" class="btn"> <%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Planet.model_name.human)}", planets_path, :class => 'pull-right' %>
+  </div>
+<% end %>

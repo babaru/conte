@@ -1,0 +1,12 @@
+defaults: &defaults
+  app:
+    name: 'Conte 内容管理工具'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,0 +1,23 @@
+zh-CN:
+  buttons:
+    reset_form: 重置表单
+    sign_in: 登录
+    edit: 编辑
+    delete: 删除
+  labels:
+    back_to: 回到
+    sign_in: 登录
+    forgot_your_password: 忘记密码
+  model:
+    show: "%{model}详细信息"
+    create: "创建%{model}"
+    list: "%{model}列表"
+    edit: "编辑%{model}"
+    delete: "删除%{model}"
+    remove: "移除%{model}"
+    auth: "授权%{model}"
+  confirms:
+    delete: 确定要删除这个条目吗？
+  navigation:
+    dashboard: 控制台
+    platforms: 社交平台

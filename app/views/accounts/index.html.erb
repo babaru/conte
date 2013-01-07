@@ -1,0 +1,39 @@
+<div class="container">
+  
+  <div class="page-header">
+    <div class="row">
+      <div class="span8">
+        <h3><%= @planet.name %> - <%= t("model.list", :model => Account.model_name.human) %></h3>
+      </div>
+      <div class="btn-toolbar pull-right">
+        <%= link_to t('model.auth', :model => Account.model_name.human), account_auth_path, :class => 'btn btn-primary' %>
+      </div>
+    </div>
+  </div> 
+
+  <%= grid(@accounts_grid, :show_filters => :always) do |g|
+
+    g.column name: t('activerecord.attributes.account.name'), html: {class: 'grid-cell'} do |account|
+      link_to account.name, "http://weibo.com/u/#{account.planet_uid}", target: 'blank'
+    end
+
+    g.column name: t('activerecord.attributes.account.expires_at'), html: {class: 'grid-cell'} do |account|
+      account.expires_at.to_s if account.expires_at
+    end
+
+    g.column name: t('activerecord.attributes.account.access_token'), html: {class: 'grid-cell'} do |account|
+      account.access_token
+    end
+
+    g.column name: t('activerecord.attributes.account.is_expired'), html: {class: 'grid-cell', style: 'width:50px;'} do |account|
+      content_tag :span, 'YES', class: 'label label-warning' if account.is_expired
+    end
+  
+    g.column :html => {:style => "width:50px;"} do |account|
+      content = []
+      content << link_to(render_icon_content('icon-trash'), planet_account_path(@planet, account), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+      content_tag :div, content.join('').html_safe, class: 'btn-group'
+    end
+  end -%>
+
+</div>

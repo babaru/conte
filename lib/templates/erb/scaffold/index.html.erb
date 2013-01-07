@@ -1,0 +1,29 @@
+<div class="container">
+  
+  <div class="page-header">
+    <div class="row">
+      <div class="span8">
+        <h2><%%= t("model.list", :model => <%= class_name.split('::').last %>.model_name.human) %></h2>
+      </div>
+      <div class="btn-toolbar pull-right">
+        <%%= link_to t('model.create', :model => <%= class_name.split('::').last %>.model_name.human), new_<%= class_name.split('::').last.underscore.downcase %>_path, :class => 'btn btn-primary' %>
+      </div>
+    </div>
+  </div> 
+
+  <%%= grid(@<%= class_name.split('::').last.underscore.downcase.pluralize %>_grid, :show_filters => :always) do |g|
+  <% attributes.each do |attribute| -%>
+    g.column :name => t('activerecord.attributes.<%= class_name.split('::').last.underscore.downcase %>.<%= attribute.name %>'), :html => {:class => "grid-cell"} do |<%= class_name.split('::').last.underscore.downcase %>|
+      <%= class_name.split('::').last.underscore.downcase %>.<%= attribute.name %>
+    end
+  <% end -%>
+
+    g.column :html => {:style => "width:50px;"} do |<%= class_name.split('::').last.underscore.downcase %>|
+      content = []
+      content << link_to(render_icon_content('icon-edit'), edit_<%= singular_table_name %>_path(<%= class_name.split('::').last.underscore.downcase %>), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+      content << link_to(render_icon_content('icon-trash'), <%= singular_table_name %>_path(<%= class_name.split('::').last.underscore.downcase %>), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+      content_tag :div, content.join('').html_safe, class: 'btn-group'
+    end
+  end -%>
+
+</div>

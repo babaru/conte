@@ -1,0 +1,20 @@
+zh-CN:
+  activerecord:
+    models:
+      account: 帐号
+      planet: 应用
+      user: 用户
+    attributes:
+      user:
+        email: 邮箱
+        password: 密码
+        remember_me: 记住我
+      planet:
+        name: 名称
+        app_key: App Key
+        app_secret: App Secret
+      account:
+        name: 帐号
+        expires_at: 过期时间
+        access_token: 授权码
+        is_expired: 过期

@@ -1,0 +1,29 @@
+<div class="container">
+  
+  <div class="page-header">
+    <div class="row">
+      <div class="span8">
+        <h3><%= t("model.list", :model => Planet.model_name.human) %></h3>
+      </div>
+      <div class="btn-toolbar pull-right">
+        <%= link_to t('model.create', :model => Planet.model_name.human), new_planet_path, :class => 'btn btn-primary' %>
+      </div>
+    </div>
+  </div> 
+
+  <%= grid(@planets_grid, :show_filters => :always) do |g|
+
+    g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
+      planet.name
+    end
+  
+    g.column :html => {:style => "width:50px;"} do |planet|
+      content = []
+      content << link_to(render_icon_content('icon-group'), planet_accounts_path(planet), :class => 'btn btn-link', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
+      content << link_to(render_icon_content('icon-edit'), edit_planet_path(planet), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+      content << link_to(render_icon_content('icon-trash'), planet_path(planet), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+      content_tag :div, content.join('').html_safe, class: 'btn-group'
+    end
+  end -%>
+
+</div>

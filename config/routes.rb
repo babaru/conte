@@ -1,4 +1,6 @@
 Conte::Application.routes.draw do
+  devise_for :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -11,7 +13,14 @@ Conte::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :planets do
+    resources :accounts
+  end
+
+  match 'planet/:planet_id/auth' => 'accounts#auth', :as => :account_auth
+
+  match 'dashboard' => 'dashboard#index', :as => :dashboard
+  match 'oauth2/authorize/planet/:planet_id' => 'oauth2#authorize'
 
   # Sample resource route with options:
   #   resources :products do
@@ -48,7 +57,7 @@ Conte::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  root :to => 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
 

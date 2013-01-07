@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= Settings.app.name %></title>
+  <%= stylesheet_link_tag "single", :media => "all" %>
+  <%= javascript_include_tag "single" %>
+  <%= csrf_meta_tags %>
+</head>
+  <body>
+    <div id="page">
+      <div class="row">
+        <div class="span4"></div>
+        <div class="span4">
+          <%- if controller_name != 'sessions' %>
+            <%= link_to t('buttons.sign_in'), new_session_path(resource_name) %><br />
+          <% end -%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span4">
+          <div id="logo">
+          </div>
+        </div>
+        <div class="span6">
+          <div id="main">
+            <%- if notice %><p class="notice"><%= notice %></p><% end -%>
+            <%- if alert %><p class="alert alert-error"><%= alert %></p><% end -%>
+          
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
