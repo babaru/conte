@@ -37,6 +37,10 @@ gem 'wice_grid'
 gem 'devise'
 gem 'cancan'
 
+gem "paperclip", "~> 3.0"
+
+gem 'tida_sina_weibo'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  body: MyText
+  planet: 
+  user: 
+  scheduled_at: 2013-01-08 11:15:19
+  is_published: false
+  published_at: 2013-01-08 11:15:19
+  type: 
+  sina_weibo_id: MyString
+  sina_weibo_url: MyString
+
+two:
+  title: MyString
+  body: MyText
+  planet: 
+  user: 
+  scheduled_at: 2013-01-08 11:15:19
+  is_published: false
+  published_at: 2013-01-08 11:15:19
+  type: 
+  sina_weibo_id: MyString
+  sina_weibo_url: MyString
