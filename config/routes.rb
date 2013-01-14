@@ -13,12 +13,16 @@ Conte::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
+
+  match 'planets/:planet_id/articles/published/:published' => 'articles#index', :as => :planet_published_articles
+
   resources :planets do
     resources :accounts, :articles
   end
 
   match 'planet/:planet_id/auth' => 'accounts#auth', :as => :account_auth
   match 'articles/:id/publish' => 'articles#publish', :as => :manual_publish
+
 
   match 'dashboard' => 'dashboard#index', :as => :dashboard
   match 'oauth2/authorize/planet/:planet_id' => 'oauth2#authorize'

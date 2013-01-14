@@ -57,5 +57,7 @@ gem 'rvm-capistrano'
 gem 'rest-client'
 gem 'oauth2'
 
+gem 'rufus-scheduler'
+
 # To use debugger
 # gem 'debugger'

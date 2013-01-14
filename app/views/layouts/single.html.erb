@@ -23,8 +23,7 @@
         </div>
         <div class="span6">
           <div id="main">
-            <%- if notice %><p class="notice"><%= notice %></p><% end -%>
-            <%- if alert %><p class="alert alert-error"><%= alert %></p><% end -%>
+            <%= render :partial => 'shared/notification' %>
           
             <%= yield %>
           </div>

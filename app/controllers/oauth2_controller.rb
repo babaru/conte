@@ -1,4 +1,6 @@
 class Oauth2Controller < ApplicationController
+  before_filter :authenticate_user!
+  
   def authorize
     @planet = Planet.find params[:planet_id]
     code = params[:code]

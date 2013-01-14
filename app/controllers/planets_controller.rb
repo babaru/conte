@@ -1,4 +1,6 @@
 class PlanetsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /planets
   # GET /planets.json
   def index

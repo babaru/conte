@@ -1,9 +1,21 @@
 class ArticlesController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /articles
   # GET /articles.json
   def index
     @planet = Planet.find params[:planet_id]
-    @articles_grid = initialize_grid(Article.where(planet_id: params[:planet_id]))
+    if params[:published]
+      @articles_grid = initialize_grid(Article.where(planet_id: params[:planet_id], is_published: true),
+        :order => 'updated_at',
+        :order_direction => 'desc'
+      )
+    else
+      @articles_grid = initialize_grid(Article.where(planet_id: params[:planet_id], is_published: false),
+        :order => 'scheduled_at',
+        :order_direction => 'asc'
+      )
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,8 +101,12 @@ class ArticlesController < ApplicationController
   def publish
     @article = Article.find params[:id]
     if request.post?
-      api = TidaSinaWeibo::ApiWrapper.new SinaWeiboApiSettings.api, @article.account.access_token
-      api.status_update @article.body
+      begin
+        @article.trigger
+        redirect_to planet_articles_path(@article.planet_id), notice: 'Article was successfully sent.'
+      rescue => e
+        redirect_to planet_articles_path(@article.planet_id), alert: e.message
+      end
     end
   end
 end

@@ -11,21 +11,55 @@
     </div>
   </div> 
 
+  <%= render :partial => 'shared/notification' %>
+
+  <ul class="nav nav-tabs">
+    <%= content_tag :li, link_to(t('activerecord.attributes.article.is_scheduled'), 'javascript:void(0);'), class: 'active' if params[:published].nil? %>
+    <%= content_tag :li, link_to(t('activerecord.attributes.article.is_scheduled'), planet_articles_path(@planet)) if params[:published] %>
+    <%= content_tag :li, link_to(t('activerecord.attributes.article.is_published'), planet_published_articles_path(@planet, 'yes')) if params[:published].nil? %>
+    <%= content_tag :li, link_to(t('activerecord.attributes.article.is_published'), 'javascript:void(0);'), class: 'active' if params[:published] %>
+  </ul>
+
   <%= grid(@articles_grid, :show_filters => :always) do |g|
+    if params[:published]
+      g.column :name => t('activerecord.attributes.article.body'), :html => {:class => 'grid-cell'} do |article|
+        link_to article.body, article.sina_weibo_url, target:'blank'
+      end
 
-    g.column :name => t('activerecord.attributes.article.body'), :html => {:class => 'grid-cell'} do |article|
-      article.body
-    end
+      g.column :name => t('activerecord.attributes.article.published_at'), :html => {class: 'grid-cell'} do |article|
+        article.published_at.to_s(:db) if article.published_at
+      end
 
-    g.column :html => {:class => 'grid-cell', :style => 'width:50px;'} do |article|
-      link_to render_icon_content('icon-fighter-jet'), manual_publish_path(article), :class => 'btn btn-small btn-inverse', :rel => 'tooltip', :title => t('buttons.manual_publish'), :method => :post
-    end
-  
-    g.column :html => {:style => "width:50px;"} do |article|
-      content = []
-      content << link_to(render_icon_content('icon-edit'), edit_planet_article_path(@planet, article), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
-      content << link_to(render_icon_content('icon-trash'), planet_article_path(@planet, article), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
-      content_tag :div, content.join('').html_safe, class: 'btn-group'
+      g.column :name => t('activerecord.attributes.article.account_id'), :html => {class: 'grid-cell'} do |article|
+        article.account.name
+      end
+    else
+      g.column :name => t('activerecord.attributes.article.body'), :html => {:class => 'grid-cell'} do |article|
+        article.body
+      end
+
+      g.column :name => t('activerecord.attributes.article.image'), :html => {:style => 'width:60px;'} do |article|
+        content_tag :div, link_to(content_tag(:i, nil, :class => 'icon-picture'), article.image.url, :class => 'btn btn-small', :rel => "gallery", :tooltip => "true", :title => t('activerecord.attributes.article.image')), :class => "gallery", "data-toggle" => "modal-gallery", "data-target" => "#modal-gallery" if article.image.exists?
+      end
+
+      g.column :name => t('activerecord.attributes.article.scheduled_at'), :html => {:class => 'grid-cell'} do |article|
+        article.scheduled_at.to_default_s if article.scheduled_at
+      end
+
+      g.column :name => t('activerecord.attributes.article.account_id'), :html => {class: 'grid-cell'} do |article|
+        article.account.name
+      end
+
+      g.column :html => {:class => 'grid-cell', :style => 'width:50px;'} do |article|
+        link_to render_icon_content('icon-fighter-jet'), manual_publish_path(article), :class => 'btn btn-small btn-inverse', :rel => 'tooltip', :title => t('buttons.manual_publish'), :method => :post
+      end
+    
+      g.column :html => {:style => "width:50px;"} do |article|
+        content = []
+        content << link_to(render_icon_content('icon-edit'), edit_planet_article_path(@planet, article), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+        content << link_to(render_icon_content('icon-trash'), planet_article_path(@planet, article), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+        content_tag :div, content.join('').html_safe, class: 'btn-group'
+      end
     end
   end -%>
 

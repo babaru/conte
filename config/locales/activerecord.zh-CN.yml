@@ -24,3 +24,8 @@ zh-CN:
         body: 正文
         account_id: 发布帐号
         scheduled_at: 计划发布时间
+        is_scheduled: 计划发布
+        published_at: 发布时间
+        is_published: 已发布
+        account_id: 发布帐号
+        image: 图片

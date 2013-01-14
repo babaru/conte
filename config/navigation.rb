@@ -37,9 +37,6 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :planets, t('model.list', model: Planet.model_name.human), planets_path
 
-    primary.item :content, t('navigation.content'), 'javascript:void(0);' do |content|
-    end
-
   end
 
 end

@@ -7,7 +7,7 @@ class CreateArticles < ActiveRecord::Migration
       t.references :user
       t.references :account
       t.datetime :scheduled_at
-      t.boolean :is_published
+      t.boolean :is_published, :default => false
       t.datetime :published_at
       t.string :type
       t.string :sina_weibo_id
