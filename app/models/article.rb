@@ -19,21 +19,26 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def trigger
-    api = SinaWeibo::ApiWrapper.new self.account.access_token
-    response = nil
-    if self.image.exists?
-      response = api.status_upload self.body, self.image.path
-    else
-      response = api.status_update self.body
-    end
+  class << self
+    def trigger(article_id)
+      article = Article.find article_id
+      if article
+        api = SinaWeibo::ApiWrapper.new article.account.access_token
+        response = nil
+        if article.image.exists?
+          response = api.status_upload article.body, article.image.path
+        else
+          response = api.status_update article.body
+        end
 
-    logger.debug response["id"]
-    self.published_at = response["created_at"]
-    self.sina_weibo_id = response["id"]
-    mid_response = api.querymid response["id"]
-    self.sina_weibo_url = "http://weibo.com/#{response['user']['id']}/#{mid_response["mid"]}"
-    self.is_published = true
-    self.save!
+        logger.debug response["id"]
+        article.published_at = response["created_at"]
+        article.sina_weibo_id = response["id"]
+        mid_response = api.querymid response["id"]
+        article.sina_weibo_url = "http://weibo.com/#{response['user']['id']}/#{mid_response["mid"]}"
+        article.is_published = true
+        article.save!
+      end
+    end
   end
 end

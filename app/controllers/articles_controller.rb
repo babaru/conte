@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :authenticate_user!
-  
+
   # GET /articles
   # GET /articles.json
   def index
@@ -102,7 +102,7 @@ class ArticlesController < ApplicationController
     @article = Article.find params[:id]
     if request.post?
       begin
-        @article.trigger
+        Article.trigger params[:id]
         redirect_to planet_articles_path(@article.planet_id), notice: 'Article was successfully sent.'
       rescue => e
         redirect_to planet_articles_path(@article.planet_id), alert: e.message
