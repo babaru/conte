@@ -14,10 +14,11 @@ Conte::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   resources :planets do
-    resources :accounts
+    resources :accounts, :articles
   end
 
   match 'planet/:planet_id/auth' => 'accounts#auth', :as => :account_auth
+  match 'articles/:id/publish' => 'articles#publish', :as => :manual_publish
 
   match 'dashboard' => 'dashboard#index', :as => :dashboard
   match 'oauth2/authorize/planet/:planet_id' => 'oauth2#authorize'

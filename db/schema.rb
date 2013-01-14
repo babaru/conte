@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107091129) do
+ActiveRecord::Schema.define(:version => 20130108031519) do
 
   create_table "accounts", :force => true do |t|
     t.string   "planet_uid"
@@ -25,6 +25,31 @@ ActiveRecord::Schema.define(:version => 20130107091129) do
   end
 
   add_index "accounts", ["planet_id"], :name => "index_accounts_on_planet_id"
+
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "planet_id"
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.datetime "scheduled_at"
+    t.boolean  "is_published"
+    t.datetime "published_at"
+    t.string   "type"
+    t.string   "sina_weibo_id"
+    t.string   "sina_weibo_url"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "attachment_access_token"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "articles", ["account_id"], :name => "index_articles_on_account_id"
+  add_index "articles", ["planet_id"], :name => "index_articles_on_planet_id"
+  add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
   create_table "planets", :force => true do |t|
     t.string   "name"

@@ -14,10 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require wice_grid
+//= require bootstrap-datetimepicker.min
 
 $(document).ready(function() {
   $("a[rel=popover]").popover();
   $(".tooltip").tooltip();
   $("a[rel=tooltip]").tooltip();
   $('.dropdown-toggle').dropdown();
+
+  $('.datetimepicker').datetimepicker({
+    format: 'yyyy-MM-dd hh:mm:ss'
+  });
 });

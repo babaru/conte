@@ -14,7 +14,7 @@
   <%= grid(@planets_grid, :show_filters => :always) do |g|
 
     g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
-      planet.name
+      link_to planet.name, planet_articles_path(planet)
     end
   
     g.column :html => {:style => "width:50px;"} do |planet|

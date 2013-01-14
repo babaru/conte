@@ -4,6 +4,7 @@ zh-CN:
     sign_in: 登录
     edit: 编辑
     delete: 删除
+    manual_publish: 手工发布
   labels:
     back_to: 回到
     sign_in: 登录

@@ -5,6 +5,7 @@ class CreateArticles < ActiveRecord::Migration
       t.text :body
       t.references :planet
       t.references :user
+      t.references :account
       t.datetime :scheduled_at
       t.boolean :is_published
       t.datetime :published_at
@@ -18,5 +19,6 @@ class CreateArticles < ActiveRecord::Migration
     end
     add_index :articles, :planet_id
     add_index :articles, :user_id
+    add_index :articles, :account_id
   end
 end

@@ -4,6 +4,7 @@ zh-CN:
       account: 帐号
       planet: 应用
       user: 用户
+      article: 内容
     attributes:
       user:
         email: 邮箱
@@ -18,3 +19,8 @@ zh-CN:
         expires_at: 过期时间
         access_token: 授权码
         is_expired: 过期
+      article:
+        title: 标题
+        body: 正文
+        account_id: 发布帐号
+        scheduled_at: 计划发布时间

@@ -1,0 +1,14 @@
+<%= simple_form_for([@planet, @article], :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :body, :input_html => { :cols => 150, :rows => 5 } %>
+    <%= f.input :planet_id, :as => :hidden %>
+    <%= f.input :account_id, :collection => @planet.accounts.map {|a| [a.name, a.id]} %>
+    <%= f.input :scheduled_at, :as => :date_time_picker %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %> <input type="reset" value="<%= t("buttons.reset_form")%>" class="btn"> <%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Article.model_name.human)}", planet_articles_path(@planet), :class => 'pull-right' %>
+  </div>
+<% end %>

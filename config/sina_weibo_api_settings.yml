@@ -1,0 +1,31 @@
+defaults: &defaults
+  api:
+    status:
+      update: 'https://api.weibo.com/2/statuses/update.json'
+      upload: 'https://upload.api.weibo.com/2/statuses/upload.json'
+      user_timeline: 'https://api.weibo.com/2/statuses/user_timeline.json'
+      user_timeline_ids: 'https://api.weibo.com/2/statuses/user_timeline/ids.json'
+      show: 'https://api.weibo.com/2/statuses/show.json'
+      repost_timeline: 'https://api.weibo.com/2/statuses/repost_timeline.json'
+      repost_timeline_ids: 'https://api.weibo.com/2/statuses/repost_timeline/ids.json'
+      queryid: 'https://api.weibo.com/2/statuses/queryid.json'
+      querymid: 'https://api.weibo.com/2/statuses/querymid.json'
+    comments:
+      show: 'https://api.weibo.com/2/comments/show.json'
+    user:
+      show: 'https://api.weibo.com/2/users/show.json'
+      domain_show: 'https://api.weibo.com/2/users/domain_show.json'
+    tags: 'https://api.weibo.com/2/tags.json'
+    friendships:
+      followers: 'https://api.weibo.com/2/friendships/followers.json'
+      followers_ids: 'https://api.weibo.com/2/friendships/followers/ids.json'
+      show: 'https://api.weibo.com/2/friendships/show.json'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
