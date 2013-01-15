@@ -12,6 +12,10 @@ class Article < ActiveRecord::Base
 
   scope :listed, where(is_published: false)
 
+  validates :scheduled_at, presence: true
+  validates :account_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :body, presence: true
+
   def schedule
     unless self.scheduled_at.nil?
       scheduler = ::Rufus::Scheduler.start_new

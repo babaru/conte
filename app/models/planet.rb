@@ -3,6 +3,13 @@ class Planet < ActiveRecord::Base
   has_many :accounts
   has_many :articles
 
+  domain_regex = /^[a-z0-9]*(\.?[a-z0-9]+)\.[a-z]{2,5}(:[0-9]{1,5})?(\/.)?$/ix
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :domain, presence: true, format: { with: domain_regex }
+  validates :auth_type, presence: true, numericality: { only_integer: true, greater_than: 0 }
+
   def authorize_url(host)
     auth_client.authorize_url "#{host}/oauth2/authorize/planet/#{self.id}"
   end
@@ -39,5 +46,4 @@ class Planet < ActiveRecord::Base
       nil
     end
   end
-
 end

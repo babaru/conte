@@ -57,6 +57,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(params[:article])
+    @planet = Planet.find @article.planet_id
 
     respond_to do |format|
       if @article.save
