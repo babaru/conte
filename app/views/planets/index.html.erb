@@ -14,7 +14,18 @@
   <%= grid(@planets_grid, :show_filters => :always) do |g|
 
     g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
-      link_to planet.name, planet_articles_path(planet)
+      content = []
+      content << link_to(planet.name, planet_articles_path(planet))
+      content << content_tag(:span, t('labels.account_expired'), class: 'label label-warning') if planet.account_expired?
+      content.join(' ').html_safe
+    end
+
+    g.column name: t('activerecord.attributes.planet.listed_articles_count'), html: {class: 'grid-cell'} do |planet|
+      planet.listed_articles_count
+    end
+
+    g.column name: t('activerecord.attributes.planet.accounts_count'), html: {class: 'grid-cell'} do |planet|
+      planet.accounts.count
     end
   
     g.column :html => {:style => "width:50px;"} do |planet|

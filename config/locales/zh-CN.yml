@@ -9,6 +9,7 @@ zh-CN:
     back_to: 回到
     sign_in: 登录
     forgot_your_password: 忘记密码
+    account_expired: 授权过期
   model:
     show: "%{model}详细信息"
     create: "创建%{model}"
