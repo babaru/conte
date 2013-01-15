@@ -11,14 +11,10 @@ class Oauth2Controller < ApplicationController
     account_data = JSON.parse response.body
     logger.info "Received authorize data: #{response.body}"
 
-    logger.info "Planet UID: #{planet_uid}"
-
-    account = Account.find_by_planet_uid planet_uid
+    account = Account.where planet_uid: planet_uid, planet_id: @planet.id
     if account.nil?
-      logger.info "Account is nil"
       account = Account.create! planet_uid: planet_uid, name: account_data['screen_name'], expires_at: Time.at(token.expires_at), access_token: token.token, planet_id: @planet.id
     else
-      logger.info "Account is not nil"
       account.expires_at = Time.at(token.expires_at)
       account.access_token = token.token
       account.save!
