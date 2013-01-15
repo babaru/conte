@@ -11,7 +11,7 @@ class Oauth2Controller < ApplicationController
     account_data = JSON.parse response.body
     logger.info "Received authorize data: #{response.body}"
 
-    account = Account.where planet_uid: planet_uid, planet_id: @planet.id
+    account = Account.where(planet_uid: planet_uid, planet_id: @planet.id).first
     if account.nil?
       account = Account.create! planet_uid: planet_uid, name: account_data['screen_name'], expires_at: Time.at(token.expires_at), access_token: token.token, planet_id: @planet.id
     else
