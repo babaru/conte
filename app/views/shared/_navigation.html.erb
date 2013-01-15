@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#"><%= Settings.app.name %></a>
+      <%= link_to Settings.app.name, "#{request.protocol}#{request.host_with_port}", class: 'brand' %></a>
       <div class="nav-collapse">
         <%= render_navigation(level: 1..2, renderer: :bootstrap_topbar_list, expand_all: true) %>
         <ul class="nav pull-right">
