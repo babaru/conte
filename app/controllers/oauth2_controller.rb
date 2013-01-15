@@ -9,6 +9,7 @@ class Oauth2Controller < ApplicationController
     planet_uid = JSON.parse(response.body)['uid']
     response = token.get('/2/users/show.json', params: {uid: planet_uid, access_token: token.token})
     account_data = JSON.parse response.body
+    logger.info "Received authorize data: #{response.body}"
 
     account = Account.find_by_planet_uid planet_uid
     if account.nil?
