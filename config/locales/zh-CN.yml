@@ -18,6 +18,7 @@ zh-CN:
     delete: "删除%{model}"
     remove: "移除%{model}"
     auth: "授权%{model}"
+    add: "添加%{model}"
   confirms:
     delete: 确定要删除这个条目吗？
   navigation:

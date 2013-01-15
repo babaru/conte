@@ -12,6 +12,8 @@ zh-CN:
         remember_me: 记住我
       planet:
         name: 名称
+        domain: 域名
+        auth_type: 授权类型
         app_key: App Key
         app_secret: App Secret
         listed_articles_count: 待发布文章数量

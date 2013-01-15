@@ -3,6 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
+    <%= f.input :domain, hint: '例如：www.sptida.com，去掉http://和/符号' %>
     <%= f.input :auth_type, :collection => Planet.auth_types, :default => AuthType.auth_types.none %>
     <%= f.input :app_key %>
     <%= f.input :app_secret %>

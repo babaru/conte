@@ -4,7 +4,7 @@ class Oauth2Controller < ApplicationController
   def authorize
     @planet = Planet.find params[:planet_id]
     code = params[:code]
-    token = @planet.get_token(code, "http://#{request.host_with_port}")
+    token = @planet.get_token(code, "#{request.protocol}#{@planet.domain}")
     response = token.post('/oauth2/get_token_info', params: {access_token: token.token})
     planet_uid = JSON.parse(response.body)['uid']
     response = token.get('/2/users/show.json', params: {uid: planet_uid, access_token: token.token})

@@ -8,8 +8,6 @@
     </div>
   </div> 
 
-  <h4><%= t("model.list", model: Planet.model_name.human) %></h4>
-
   <%= grid(@planets_grid, :show_filters => :always) do |g|
     g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
       content = []
@@ -22,11 +20,43 @@
       planet.listed_articles_count
     end
   
-    g.column :html => {:style => "width:50px;"} do |planet|
+    g.column :html => {:style => "width:70px;"} do |planet|
+      link_to(render_icon_and_text_content('icon-group', planet.accounts.count), planet_accounts_path(planet), :class => 'btn btn-info', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
+    end
+
+    g.column :html => {:style => "width:100px;"} do |planet|
+      link_to(render_icon_and_text_content('icon-plus-sign', t('model.add', :model => Article.model_name.human)), new_planet_article_path(planet), :class => 'btn btn-success', :rel => 'tooltip', :title => t('model.add', :model => Article.model_name.human))
+    end
+  end -%>
+
+  <hr />
+
+  <%= grid(@listed_articles_grid, :show_filters => :always) do |g|
+    g.column :name => t('activerecord.attributes.article.body'), :html => {:class => 'grid-cell'} do |article|
+      article.body
+    end
+
+    g.column :name => t('activerecord.attributes.article.image'), :html => {:style => 'width:60px;'} do |article|
+      content_tag :div, link_to(content_tag(:i, nil, :class => 'icon-picture'), article.image.url, :class => 'btn btn-small', :rel => "gallery", :tooltip => "true", :title => t('activerecord.attributes.article.image')), :class => "gallery", "data-toggle" => "modal-gallery", "data-target" => "#modal-gallery" if article.image.exists?
+    end
+
+    g.column :name => t('activerecord.attributes.article.scheduled_at'), :html => {:class => 'grid-cell'} do |article|
+      article.scheduled_at.to_default_s if article.scheduled_at
+    end
+
+    g.column :name => t('activerecord.attributes.article.account_id'), :html => {class: 'grid-cell'} do |article|
+      article.account.name
+    end
+
+    g.column :html => {:class => 'grid-cell', :style => 'width:50px;'} do |article|
+      link_to render_icon_content('icon-fighter-jet'), manual_publish_path(article), :class => 'btn btn-small btn-inverse', :rel => 'tooltip', :title => t('buttons.manual_publish'), :method => :post
+    end
+  
+    g.column :html => {:style => "width:50px;"} do |article|
       content = []
-      content << link_to(render_icon_content('icon-group'), planet_accounts_path(planet), :class => 'btn-link', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
-      content << content_tag(:span, planet.accounts.count, class: 'label label-info')
-      content.join(' ').html_safe
+      content << link_to(render_icon_content('icon-edit'), edit_planet_article_path(@planet, article), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+      content << link_to(render_icon_content('icon-trash'), planet_article_path(@planet, article), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+      content_tag :div, content.join('').html_safe, class: 'btn-group'
     end
   end -%>
 

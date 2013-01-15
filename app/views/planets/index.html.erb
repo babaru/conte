@@ -20,17 +20,24 @@
       content.join(' ').html_safe
     end
 
+    g.column name: t('activerecord.attributes.planet.domain'), html: {class: 'grid-cell'} do |planet|
+      planet.domain
+    end
+
     g.column name: t('activerecord.attributes.planet.listed_articles_count'), html: {class: 'grid-cell'} do |planet|
       planet.listed_articles_count
     end
 
-    g.column name: t('activerecord.attributes.planet.accounts_count'), html: {class: 'grid-cell'} do |planet|
-      planet.accounts.count
+    g.column :html => {:style => "width:70px;"} do |planet|
+      link_to(render_icon_and_text_content('icon-group', planet.accounts.count), planet_accounts_path(planet), :class => 'btn btn-info', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
+    end
+
+    g.column :html => {:style => "width:100px;"} do |planet|
+      link_to(render_icon_and_text_content('icon-plus-sign', t('model.add', :model => Article.model_name.human)), new_planet_article_path(planet), :class => 'btn btn-success', :rel => 'tooltip', :title => t('model.add', :model => Article.model_name.human))
     end
   
     g.column :html => {:style => "width:50px;"} do |planet|
       content = []
-      content << link_to(render_icon_content('icon-group'), planet_accounts_path(planet), :class => 'btn btn-link', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
       content << link_to(render_icon_content('icon-edit'), edit_planet_path(planet), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
       content << link_to(render_icon_content('icon-trash'), planet_path(planet), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
       content_tag :div, content.join('').html_safe, class: 'btn-group'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108031519) do
+ActiveRecord::Schema.define(:version => 20130115103222) do
 
   create_table "accounts", :force => true do |t|
     t.string   "planet_uid"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20130108031519) do
     t.integer  "user_id"
     t.integer  "account_id"
     t.datetime "scheduled_at"
-    t.boolean  "is_published"
+    t.boolean  "is_published",            :default => false
     t.datetime "published_at"
     t.string   "type"
     t.string   "sina_weibo_id"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20130108031519) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "attachment_access_token"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   add_index "articles", ["account_id"], :name => "index_articles_on_account_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130108031519) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "auth_type"
+    t.string   "domain"
   end
 
   create_table "roles", :force => true do |t|

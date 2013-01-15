@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
 
   def auth
     @planet = Planet.find params[:planet_id]
-    redirect_to @planet.authorize_url "http://#{request.host_with_port}"
+    redirect_to @planet.authorize_url "#{request.protocol}#{@planet.domain}"
   end
 
   # DELETE /accounts/1

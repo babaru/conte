@@ -1,5 +1,5 @@
 class Planet < ActiveRecord::Base
-  attr_accessible :app_key, :app_secret, :name, :auth_type
+  attr_accessible :app_key, :app_secret, :name, :auth_type, :domain
   has_many :accounts
   has_many :articles
 
