@@ -7,8 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
   <body>
-    <div id="page">
-      <div class="row">
+    <div id="page" class="container-fluid">
+      <div class="row-fluid">
         <div class="span4"></div>
         <div class="span4">
           <%- if controller_name != 'sessions' %>
@@ -16,7 +16,7 @@
           <% end -%>
         </div>
       </div>
-      <div class="row">
+      <div class="row-fluid">
         <div class="span4">
           <div id="logo">
           </div>
@@ -24,7 +24,6 @@
         <div class="span6">
           <div id="main">
             <%= render :partial => 'shared/notification' %>
-          
             <%= yield %>
           </div>
         </div>

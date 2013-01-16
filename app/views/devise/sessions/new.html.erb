@@ -6,19 +6,20 @@
   </div>
 
   <div class="form-actions">
-    <div class="row">
-      <div class="span2">
-        <%= f.button :submit, t('buttons.sign_in'), class: 'btn btn-primary btn-large' %> 
-      </div>
-      <div class="span1">
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-      </div>
-      <div class="span1">
-        <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-          <%= link_to t('labels.forgot_your_password'), new_password_path(resource_name) %><br />
-        <% end -%>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span4">
+          <%= f.button :submit, t('buttons.sign_in'), class: 'btn btn-primary btn-large' %> 
+        </div>
+        <div class="span2">
+          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+        </div>
+        <div class="span2">
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+            <%= link_to t('labels.forgot_your_password'), new_password_path(resource_name) %><br />
+          <% end -%>
+        </div>
       </div>
     </div>
-    
   </div>
 <% end %>
