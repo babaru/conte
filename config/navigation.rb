@@ -7,15 +7,15 @@ SimpleNavigation::Configuration.run do |navigation|
   # navigation.renderer = Your::Custom::Renderer
 
   # Specify the class that will be applied to active navigation items. Defaults to 'selected'
-  # navigation.selected_class = 'your_selected_class'
+  navigation.selected_class = 'active'
 
   # Specify the class that will be applied to the current leaf of
   # active navigation items. Defaults to 'simple-navigation-active-leaf'
-  # navigation.active_leaf_class = 'your_active_leaf_class'
+  navigation.active_leaf_class = nil
 
   # Item keys are normally added to list items as id.
   # This setting turns that off
-  # navigation.autogenerate_item_ids = false
+  navigation.autogenerate_item_ids = false
 
   # You can override the default logic that is used to autogenerate the item ids.
   # To do this, define a Proc which takes the key of the current item as argument.
@@ -33,9 +33,9 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigation
   navigation.items do |primary|
 
-    primary.item :dashboard, t('navigation.dashboard'), dashboard_url
-
-    primary.item :planets, t('model.list', model: Planet.model_name.human), planets_path
+    primary.item :dashboard, render_icon_and_text_content('icon-dashboard', t('navigation.dashboard')), dashboard_url, highlights_on: /dashboard/
+    primary.item :planets, render_icon_and_text_content('icon-globe', t('model.list', model: Planet.model_name.human)), planets_path, highlights_on: /planets/
+    primary.item :users, render_icon_and_text_content('icon-user', t('model.list', model: User.model_name.human)), users_path, highlights_on: /users/ if can? :manage, User
 
   end
 

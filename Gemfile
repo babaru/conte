@@ -11,10 +11,12 @@ gem 'mysql2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
+  gem "sass-rails"
   gem 'coffee-rails'
+  gem 'compass-rails'
 
   gem 'bootstrap-sass'
+
   gem 'font-awesome-sass-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

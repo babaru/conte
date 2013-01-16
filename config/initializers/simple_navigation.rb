@@ -1,1 +1,3 @@
 SimpleNavigation.register_renderer :bootstrap_topbar_list => BootstrapTopbarList
+SimpleNavigation.register_renderer :navigation_renderer => NavigationRenderer
+SimpleNavigation.register_renderer :conte_breadcrumbs_renderer => ConteBreadcrumbsRenderer

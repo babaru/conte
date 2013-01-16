@@ -1,7 +1,6 @@
-<div class="container">
-  <div class="page-header">
-    <h2><%= t("model.edit", :model => Planet.model_name.human) %></h2>
-  </div>
+<% content_for :breadcrumbs do %>
+<%= render :partial => 'shared/breadcrumbs_default' %>
+<%= content_tag :li, render_icon_and_text_content('icon-edit', t('model.edit', model: Planet.model_name.human)) %>
+<% end %>
   
-  <%= render 'form' %>
-</div>
+<%= render 'form' %>

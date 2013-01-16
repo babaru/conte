@@ -1,7 +1,7 @@
-<div class="container">
-  <div class="page-header">
-    <h2><%= t("model.edit", :model => Article.model_name.human) %></h2>
-  </div>
-  
-  <%= render 'form' %>
-</div>
+<% content_for :breadcrumbs do %>
+<%= render :partial => 'shared/breadcrumbs_default' %>
+<%= content_tag :li, link_to(render_icon_and_text_content('icon-file-alt', t('model.list', model: Article.model_name.human)), planet_articles_path(@planet)) %>
+<%= content_tag :li, render_icon_and_text_content('icon-plus-sign', t('model.edit', model: Article.model_name.human)) %>
+<% end %>
+
+<%= render 'form' %>

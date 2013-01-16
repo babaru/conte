@@ -1,0 +1,38 @@
+<% content_for :breadcrumbs do %>
+<%= render :partial => 'shared/breadcrumbs_default' %>
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span6 offset6">
+      <div class="btn-toolbar pull-right">
+        <%= link_to t('model.create', :model => User.model_name.human), new_user_path, :class => 'btn btn-primary' if can? :create, User %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+
+  <%= grid(@users_grid, :show_filters => :always) do |g|
+
+    g.column name: t('activerecord.attributes.user.email'), html: { class: 'grid-cell' } do |user|
+      user.email
+    end
+
+    g.column name: t('activerecord.attributes.user.role'), html: { class: 'grid-cell' } do |user|
+      if user.role? 'sys_admin'
+        content_tag(:i, nil, class: 'icon-user red')
+      end
+    end
+
+    g.column :html => {:style => "width:50px;"} do |user|
+      if can? :manage, user
+        content = []
+        content << link_to(render_icon_content('icon-edit'), edit_user_path(user), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+        content << link_to(render_icon_content('icon-trash'), user_path(user), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+        content_tag :div, content.join('').html_safe, class: 'btn-group'
+      end
+    end
+  end -%>
+
+</div>

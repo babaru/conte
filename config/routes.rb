@@ -1,5 +1,7 @@
 Conte::Application.routes.draw do
-  devise_for :users
+  # devise_for :users, :path_prefix => 'tida'
+  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -22,7 +24,6 @@ Conte::Application.routes.draw do
 
   match 'planet/:planet_id/auth' => 'accounts#auth', :as => :account_auth
   match 'articles/:id/publish' => 'articles#publish', :as => :manual_publish
-
 
   match 'dashboard' => 'dashboard#index', :as => :dashboard
   match 'oauth2/authorize/planet/:planet_id' => 'oauth2#authorize'

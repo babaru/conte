@@ -7,7 +7,17 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.role? :super_admin
-        can :manage, :all 
+      can :manage, :all 
+    elsif user.role? :supervisor
+      can :manage, Planet
+      can :manage, Account
+      can :manage, Article
+      can :read, :all
+    else
+      can [:read, :create], Article
+      can [:update, :destroy], Article, :user_id => user.id
+      can :read, :all
+      cannot :read, User
     end
 
     #   if user.admin?

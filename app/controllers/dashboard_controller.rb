@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
+  skip_authorization_check
   
   def index
     @planets_grid = initialize_grid(Planet, name: 'planets_grid')

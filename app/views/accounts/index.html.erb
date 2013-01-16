@@ -1,15 +1,18 @@
-<div class="container">
-  
-  <div class="page-header">
-    <div class="row">
-      <div class="span8">
-        <h3><%= @planet.name %> - <%= t("model.list", :model => Account.model_name.human) %></h3>
-      </div>
+<% content_for :breadcrumbs do %>
+<%= render :partial => 'shared/breadcrumbs_default' %>
+<%= content_tag :li, render_icon_and_text_content('icon-file-alt', t('model.list', model: Account.model_name.human)) %>
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span6 offset6">
       <div class="btn-toolbar pull-right">
-        <%= link_to t('model.auth', :model => Account.model_name.human), account_auth_path, :class => 'btn btn-primary' %>
+        <%= link_to t('model.auth', :model => Account.model_name.human), account_auth_path, :class => 'btn btn-primary' if can? :create, User %>
       </div>
     </div>
-  </div> 
+  </div>
+
+  <div class="row-fluid">
 
   <%= grid(@accounts_grid, :show_filters => :always) do |g|
 
@@ -18,7 +21,7 @@
     end
 
     g.column name: t('activerecord.attributes.account.expires_at'), html: {class: 'grid-cell'} do |account|
-      account.expires_at.to_s if account.expires_at
+      account.expires_at.to_s(:db) if account.expires_at
     end
 
     g.column name: t('activerecord.attributes.account.access_token'), html: {class: 'grid-cell'} do |account|
@@ -30,9 +33,11 @@
     end
   
     g.column :html => {:style => "width:50px;"} do |account|
-      content = []
-      content << link_to(render_icon_content('icon-trash'), planet_account_path(@planet, account), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
-      content_tag :div, content.join('').html_safe, class: 'btn-group'
+      if can? :manage, account
+        content = []
+        content << link_to(render_icon_content('icon-trash'), planet_account_path(@planet, account), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+        content_tag :div, content.join('').html_safe, class: 'btn-group'
+      end
     end
   end -%>
 

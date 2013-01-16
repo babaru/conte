@@ -11,7 +11,14 @@
  *= require_self
  *= require base
  *= require bootstrap-datetimepicker.min
+ *= require conte
  */
+
+ body {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+ }
 
  .grid-cell {
     vertical-align:middle !important;
@@ -32,6 +39,7 @@
     font-weight:bold;
   }
 
-  .help-block {
-    color:#aaa !important;
+  .red {
+    color: red;
   }
+

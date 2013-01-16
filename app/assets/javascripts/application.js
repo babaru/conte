@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require wice_grid
 //= require bootstrap-datetimepicker.min
+//= require conte
 
 $(document).ready(function() {
   $("a[rel=popover]").popover();
@@ -25,4 +26,6 @@ $(document).ready(function() {
   $('.datetimepicker').datetimepicker({
     format: 'yyyy-MM-dd hh:mm:ss'
   });
+
+  toggleSubMenu();
 });

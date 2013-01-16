@@ -1,12 +1,11 @@
-<div class="container">
-  
-  <div class="page-header">
-    <div class="row">
-      <div class="span8">
-        <h3><%= t("navigation.dashboard") %></h3>
-      </div>
-    </div>
-  </div> 
+<% content_for :breadcrumbs do %>
+<%= render :partial => 'shared/breadcrumbs_default' %>
+<% end %>
+
+<article>
+  <header>
+    <h4><%= render_icon_and_text_content('icon-globe', t("model.list", :model => Planet.model_name.human)) %></h4>
+  </header>
 
   <%= grid(@planets_grid, :show_filters => :always) do |g|
     g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
@@ -28,9 +27,14 @@
       link_to(render_icon_and_text_content('icon-plus-sign', t('model.add', :model => Article.model_name.human)), new_planet_article_path(planet), :class => 'btn btn-success', :rel => 'tooltip', :title => t('model.add', :model => Article.model_name.human))
     end
   end -%>
+</article>
 
-  <hr />
-
+  
+<article>
+  <header>
+    <h4><%= render_icon_and_text_content('icon-time', t('labels.listed_articles')) %></h4>
+  </header>
+  
   <%= grid(@listed_articles_grid, :show_filters => :always) do |g|
     g.column :name => t('activerecord.attributes.article.body'), :html => {:class => 'grid-cell'} do |article|
       article.body
@@ -59,5 +63,4 @@
       content_tag :div, content.join('').html_safe, class: 'btn-group'
     end
   end -%>
-
-</div>
+</article>

@@ -10,6 +10,9 @@ zh-CN:
     sign_in: 登录
     forgot_your_password: 忘记密码
     account_expired: 授权过期
+    listed_articles: 待发布内容
+    home: 首页
+    welcome: 欢迎
   model:
     show: "%{model}详细信息"
     create: "创建%{model}"

@@ -1,24 +1,18 @@
-class BootstrapTopbarList < SimpleNavigation::Renderer::Base
+class NavigationRenderer < SimpleNavigation::Renderer::Base
 
   def render(item_container)
     if options[:is_subnavigation]
-      ul_class = "dropdown-menu"
+      ul_class = "child"
     else
-      ul_class = "nav"
+      ul_class = "parent"
     end
 
     list_content = item_container.items.inject([]) do |list, item|
       li_options = item.html_options.reject {|k, v| k == :link}
-      if include_sub_navigation?(item)
-        li_options[:class] = [li_options[:class], "dropdown"].flatten.compact.join(' ')
-      end
       li_content = tag_for(item)
       if include_sub_navigation?(item)
         li_content << render_sub_navigation_for(item)
       end
-      # if !options[:is_subnavigation]
-      #   list << content_tag(:li, nil, {:class => "divider-vertical"})
-      # end
       list << content_tag(:li, li_content, li_options)
     end.join
     if skip_if_empty? && item_container.empty?
@@ -53,14 +47,8 @@ class BootstrapTopbarList < SimpleNavigation::Renderer::Base
     special_options = {:method => item.method}.reject {|k, v| v.nil? }
     link_options = item.html_options[:link] || {}
     opts = special_options.merge(link_options)
-    opts[:class] = [link_options[:class], item.selected_class, dropdown_link_class(item)].flatten.compact.join(' ')
+    opts[:class] = [link_options[:class], item.selected_class].flatten.compact.join(' ')
     opts.delete(:class) if opts[:class].nil? || opts[:class] == ''
     opts
-  end
-
-  def dropdown_link_class(item)
-    if include_sub_navigation?(item) && !options[:is_subnavigation]
-      "dropdown-toggle"
-    end
   end
 end

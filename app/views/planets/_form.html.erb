@@ -1,3 +1,13 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="btn-toolbar">
+        <%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Planet.model_name.human)}", planets_path, :class => 'btn btn-inverse' %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= simple_form_for(@planet, :html => {:class => 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
@@ -10,6 +20,6 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-primary' %> <input type="reset" value="<%= t("buttons.reset_form")%>" class="btn"> <%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Planet.model_name.human)}", planets_path, :class => 'pull-right' %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>
