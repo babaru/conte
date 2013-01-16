@@ -4,7 +4,7 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-<%= link_to t('model.create', :model => Article.model_name.human), new_planet_article_path, :class => 'btn btn-inverse' %>
+<%= render :partial => 'shared/page_toolbar', :locals => {:content => link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Article.model_name.human)), new_planet_article_path, :class => 'btn btn-inverse')} %>
 <% end %>
 
 <%= render :partial => 'shared/notification' %>

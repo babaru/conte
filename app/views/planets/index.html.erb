@@ -2,8 +2,10 @@
 <%= render :partial => 'shared/breadcrumbs_default' %>
 <% end %>
 
+<% if can? :create, Planet %>
 <% content_for :page_toolbar do %>
-  <%= link_to render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Planet.model_name.human)), new_planet_path, :class => 'btn btn-inverse' if can? :create, Planet %>
+<%= render :partial => 'shared/page_toolbar', :locals => {:content => link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Planet.model_name.human)), new_planet_path, :class => 'btn btn-inverse')} %>
+<% end %>
 <% end %>
 
 <%= grid(@planets_grid, :show_filters => :always) do |g|
