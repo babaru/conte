@@ -2,50 +2,42 @@
 <%= render :partial => 'shared/breadcrumbs_default' %>
 <% end %>
 
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span6 offset6">
-      <div class="btn-toolbar pull-right">
-        <%= link_to t('model.create', :model => Planet.model_name.human), new_planet_path, :class => 'btn btn-primary' if can? :create, Planet %>
-      </div>
-    </div>
-  </div>
+<% content_for :page_toolbar do %>
+  <%= link_to render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Planet.model_name.human)), new_planet_path, :class => 'btn btn-inverse' if can? :create, Planet %>
+<% end %>
 
-  <div class="row-fluid">
-    <%= grid(@planets_grid, :show_filters => :always) do |g|
-      g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
-        content = []
-        content << link_to(planet.name, planet_articles_path(planet))
-        content << content_tag(:span, t('labels.account_expired'), class: 'label label-warning') if planet.account_expired?
-        content.join(' ').html_safe
-      end
+<%= grid(@planets_grid, :show_filters => :always) do |g|
+  g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
+    content = []
+    content << link_to(planet.name, planet_articles_path(planet))
+    content << content_tag(:span, t('labels.account_expired'), class: 'label label-warning') if planet.account_expired?
+    content.join(' ').html_safe
+  end
 
-      g.column name: t('activerecord.attributes.planet.domain'), html: {class: 'grid-cell'} do |planet|
-        planet.domain
-      end
+  g.column name: t('activerecord.attributes.planet.domain'), html: {class: 'grid-cell'} do |planet|
+    planet.domain
+  end
 
-      g.column name: t('activerecord.attributes.planet.listed_articles_count'), html: {class: 'grid-cell'} do |planet|
-        planet.listed_articles_count
-      end
+  g.column name: t('activerecord.attributes.planet.listed_articles_count'), html: {class: 'grid-cell'} do |planet|
+    planet.listed_articles_count
+  end
 
-      g.column :html => {:style => "width:70px;"} do |planet|
-        link_to(render_icon_and_text_content('icon-group', planet.accounts.count), planet_accounts_path(planet), :class => 'btn btn-info', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
-      end
+  g.column :html => {:style => "width:70px;"} do |planet|
+    link_to(render_icon_and_text_content('icon-group', planet.accounts.count), planet_accounts_path(planet), :class => 'btn btn-info', :rel => 'tooltip', :title => t('model.list', :model => Account.model_name.human))
+  end
 
-      g.column :html => {:style => "width:100px;"} do |planet|
-        link_to(render_icon_and_text_content('icon-plus-sign', t('model.add', :model => Article.model_name.human)), new_planet_article_path(planet), :class => 'btn btn-success', :rel => 'tooltip', :title => t('model.add', :model => Article.model_name.human))
-      end
-    
-      g.column :html => {:style => "width:50px;"} do |planet|
-        if can? :manage, planet
-          content = []
-          content << link_to(render_icon_content('icon-edit'), edit_planet_path(planet), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
-          content << link_to(render_icon_content('icon-trash'), planet_path(planet), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
-          content_tag :div, content.join('').html_safe, class: 'btn-group'
-        end
-      end
-    end -%>
-  </div>
-</div>
+  g.column :html => {:style => "width:100px;"} do |planet|
+    link_to(render_icon_and_text_content('icon-plus-sign', t('model.add', :model => Article.model_name.human)), new_planet_article_path(planet), :class => 'btn btn-success', :rel => 'tooltip', :title => t('model.add', :model => Article.model_name.human))
+  end
+
+  g.column :html => {:style => "width:50px;"} do |planet|
+    if can? :manage, planet
+      content = []
+      content << link_to(render_icon_content('icon-edit'), edit_planet_path(planet), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+      content << link_to(render_icon_content('icon-trash'), planet_path(planet), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+      content_tag :div, content.join('').html_safe, class: 'btn-group'
+    end
+  end
+end -%>
 
     

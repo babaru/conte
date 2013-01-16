@@ -1,13 +1,6 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span6">
-      <div class="btn-toolbar">
-        <%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Article.model_name.human)}", planet_articles_path(@planet), :class => 'btn btn-inverse' %>
-      </div>
-    </div>
-  </div>
-</div>
-
+<% content_for :page_toolbar do %>
+<%= link_to "#{t('labels.back_to')}#{t('model.list', :model => Article.model_name.human)}", planet_articles_path(@planet), :class => 'btn btn-inverse' %>
+<% end %>
 
 <%= simple_form_for([@planet, @article], :html => {:class => 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
