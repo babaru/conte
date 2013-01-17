@@ -9,37 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require base
+ *= require bootstrap-overwrite
  *= require bootstrap-datetimepicker.min
+ *= require wice_grid
  *= require conte
  */
 
- body {
-    height: 100%;
-    width: 100%;
-    position: absolute;
- }
 
- .grid-cell {
-    vertical-align:middle !important;
-    text-align:center;
-  }
-
-  .date-cell {
-    vertical-align:middle;
-    text-align:center;
-    color:#aaa;
-    font-size:9px;
-  }
-
-  .number-cell {
-    vertical-align:middle;
-    text-align:center;
-    font-size:16px;
-    font-weight:bold;
-  }
-
-  .red {
-    color: red;
-  }
 

@@ -9,7 +9,15 @@ zh-CN:
       user:
         email: 邮箱
         password: 密码
+        password_confirmation: 密码确认
         remember_me: 记住我
+        role: 身份
+        role_id: 身份
+        current_sign_in_at: 本次登录时间
+        current_sign_in_ip: 本次登录IP
+        last_sign_in_at: 上次登录时间
+        last_sign_in_ip: 上次登录IP
+        sign_in_count: 登录次数
       planet:
         name: 名称
         domain: 域名

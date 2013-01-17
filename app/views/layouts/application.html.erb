@@ -32,12 +32,12 @@
                   <a href="javascript:void(0);" class="dropdown-toggle"><%= t("labels.welcome")%>, <strong><%= current_user.email %></strong> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li>
-                      <%= link_to(t("devise.elements.sign_out"), destroy_user_session_path, :method=>'delete') %>
+                      <%= link_to(t("buttons.sign_out"), destroy_user_session_path, :method=>'delete') %>
                     </li>
                   </ul>
                 </li>
                 <% else %>
-                <li><%= link_to t("devise.elements.sign_in"), :user_session %></li>
+                <li><%= link_to t("buttons.sign_in"), :user_session %></li>
                 <% end -%>
               </ul>
             </div>

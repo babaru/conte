@@ -1,12 +1,7 @@
-@import 'compass';
+@import 'bootstrap/mixins';
 
 a {
-  color: #333;
   text-decoration: none;
-
-  .caret {
-    border-top: 4px solid #333;
-  }
 }
 
 a:hover {
@@ -190,4 +185,8 @@ form {
   background: #D6D7D8;
   padding: 20px;
   @include box-shadow(rgba(0, 0, 0, 0.15) 0px 0px 5px inset);
+}
+
+.bold {
+  font-weight: bold;
 }

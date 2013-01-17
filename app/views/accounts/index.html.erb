@@ -7,7 +7,7 @@
   <div class="row-fluid">
     <div class="span6 offset6">
       <div class="btn-toolbar pull-right">
-        <%= link_to t('model.auth', :model => Account.model_name.human), account_auth_path, :class => 'btn btn-primary' if can? :create, User %>
+        <%= link_to t('model.auth', :model => Account.model_name.human), account_auth_path, :class => 'btn btn-inverse' if can? :create, User %>
       </div>
     </div>
   </div>

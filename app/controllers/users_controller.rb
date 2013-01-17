@@ -45,9 +45,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
+    role = Role.find params[:user][:role_id]
+    if role
+      @user.roles.clear
+      @user.roles << role
+    end
+
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_path(@user), notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -60,10 +66,20 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @user = User.find(params[:id])
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
+    role = Role.find params[:user][:role_id]
+    if role
+      @user.roles.clear
+      @user.roles << role
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

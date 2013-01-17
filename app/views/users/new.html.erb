@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="page-header">
-    <h2><%= t("model.create", :model => User.model_name.human) %></h2>
-  </div>
+<% content_for :breadcrumbs do %>
+<%= render :partial => 'shared/breadcrumbs_default' %>
+<%= content_tag :li, link_to(render_icon_and_text_content('icon-file-alt', t('model.list', model: User.model_name.human)), users_path) %>
+<%= content_tag :li, render_icon_and_text_content('icon-plus-sign', t('model.create', model: User.model_name.human)) %>
+<% end %>
   
-  <%= render 'form' %>
-</div>
+<%= render 'form' %>
 

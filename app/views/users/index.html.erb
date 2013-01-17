@@ -2,37 +2,54 @@
 <%= render :partial => 'shared/breadcrumbs_default' %>
 <% end %>
 
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span6 offset6">
-      <div class="btn-toolbar pull-right">
-        <%= link_to t('model.create', :model => User.model_name.human), new_user_path, :class => 'btn btn-primary' if can? :create, User %>
-      </div>
-    </div>
-  </div>
+<% if can? :create, User %>
+<% content_for :page_toolbar do %>
+<%= render :partial => 'shared/page_toolbar', :locals => {:content => link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => User.model_name.human)), new_user_path, :class => 'btn btn-inverse')} if can? :create, User %>
+<% end %>
+<% end %>
 
-  <div class="row-fluid">
+<%= grid(@users_grid, :show_filters => :always) do |g|
 
-  <%= grid(@users_grid, :show_filters => :always) do |g|
+  g.column name: t('activerecord.attributes.user.email'), html: { class: 'grid-cell bold' } do |user|
+    user.email
+  end
 
-    g.column name: t('activerecord.attributes.user.email'), html: { class: 'grid-cell' } do |user|
-      user.email
+  g.column name: t('activerecord.attributes.user.current_sign_in_at'), html: { class: 'grid-cell' } do |user|
+    user.current_sign_in_at.to_s(:db) if user.current_sign_in_at
+  end
+
+  g.column name: t('activerecord.attributes.user.current_sign_in_ip'), html: { class: 'grid-cell' } do |user|
+    user.current_sign_in_ip if user.current_sign_in_ip
+  end
+
+  g.column name: t('activerecord.attributes.user.last_sign_in_at'), html: { class: 'grid-cell' } do |user|
+    user.last_sign_in_at.to_s(:db) if user.last_sign_in_at
+  end
+
+  g.column name: t('activerecord.attributes.user.last_sign_in_ip'), html: { class: 'grid-cell' } do |user|
+    user.last_sign_in_ip if user.last_sign_in_ip
+  end
+
+  g.column name: t('activerecord.attributes.user.sign_in_count'), html: { class: 'grid-cell' } do |user|
+    user.sign_in_count if user.sign_in_count
+  end
+
+  g.column name: t('activerecord.attributes.user.role'), html: { class: 'grid-cell', style: 'width: 50px;' } do |user|
+    if user.role? 'super_admin'
+      content_tag(:span, 'SA', class: 'badge badge-important')
+    elsif user.role? 'supervisor'
+      content_tag(:span, 'S', class: 'badge badge-warning')
+    else
+      content_tag(:span, 'E', class: 'badge badge-info')
     end
+  end
 
-    g.column name: t('activerecord.attributes.user.role'), html: { class: 'grid-cell' } do |user|
-      if user.role? 'sys_admin'
-        content_tag(:i, nil, class: 'icon-user red')
-      end
+  g.column :html => {:style => "width:50px;"} do |user|
+    if can? :manage, user
+      content = []
+      content << link_to(render_icon_content('icon-edit'), edit_user_path(user), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
+      content << link_to(render_icon_content('icon-trash'), user_path(user), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
+      content_tag :div, content.join('').html_safe, class: 'btn-group'
     end
-
-    g.column :html => {:style => "width:50px;"} do |user|
-      if can? :manage, user
-        content = []
-        content << link_to(render_icon_content('icon-edit'), edit_user_path(user), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.edit'))
-        content << link_to(render_icon_content('icon-trash'), user_path(user), :method => :delete, :confirm => t("confirms.delete"), :class => 'btn btn-link', :rel => 'tooltip', :title => t('buttons.delete'))
-        content_tag :div, content.join('').html_safe, class: 'btn-group'
-      end
-    end
-  end -%>
-
-</div>
+  end
+end -%>

@@ -8,7 +8,7 @@
   </header>
 
   <%= grid(@planets_grid, :show_filters => :always) do |g|
-    g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell'} do |planet|
+    g.column name: t('activerecord.attributes.planet.name'), html: {class: 'grid-cell bold'} do |planet|
       content = []
       content << link_to(planet.name, planet_articles_path(planet))
       content << content_tag(:span, t('labels.account_expired'), class: 'label label-warning') if planet.account_expired?
