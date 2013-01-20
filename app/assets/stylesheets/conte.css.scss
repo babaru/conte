@@ -20,12 +20,15 @@ body {
 
   #page {
     width: 100%; height: inherit;
-    display: table;
+    margin: 0px; padding: 0px;
+
+    > .row-fluid {
+      height: inherit;
+    }
 
     #sidebar {
       background: #3B3D43;
       width: 16%; height: inherit;
-      display: table-cell;
 
       #logo-bg {
         background: #3B3D43;
@@ -111,8 +114,7 @@ body {
 
     #main {
       width: 84%; 
-      display: table-cell;
-      vertical-align: top;
+      margin: 0px;
       #header {
         position: relative;
         z-index: 1000;
@@ -155,6 +157,7 @@ body {
         position: relative;
         z-index: 1;
         padding: 10px;
+        height: 30px;
 
         a {
           margin: 0px 5px;

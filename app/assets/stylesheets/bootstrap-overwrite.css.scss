@@ -21,6 +21,7 @@ $tableBackgroundHover: #CCCCCC;
 
 @import 'bootstrap';
 @import 'bootstrap/reset';
+@import 'bootstrap/responsive';
 
 @import 'font-awesome';
 
@@ -45,7 +46,8 @@ $tableBackgroundHover: #CCCCCC;
   @include border-radius(0);
 }
 
-.container-fluid {
+.container-fluid,
+.row-fluid { 
   padding: 0px;
 }
 
