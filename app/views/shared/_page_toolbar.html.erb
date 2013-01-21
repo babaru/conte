@@ -1,8 +1,11 @@
 <div id="page-toolbar" class="container-fluid">
   <div class="row-fluid">
-    <div class="span6 offset6">
+    <div class="span6">
+      <%= yield :left_page_toolbar %>
+    </div>
+    <div class="span6">
       <div class="btn-toolbar pull-right">
-        <%= content %>
+      <%= yield :right_page_toolbar %>
       </div>
     </div>
   </div>

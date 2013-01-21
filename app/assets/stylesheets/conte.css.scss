@@ -120,9 +120,9 @@ body {
         z-index: 1000;
         @include box-shadow(rgba(0, 0, 0, 0.3) 0px 2px 3px); 
         height: 50px;
-        .breadcrumb {
+        .breadcrumbs {
           background: none;
-          padding: 0px;
+          padding: 0px; margin: 0px;
 
           li {
             height: 50px;

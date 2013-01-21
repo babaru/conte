@@ -1,13 +1,6 @@
-<% content_for :breadcrumbs do %>
-<%= render :partial => 'shared/breadcrumbs_default' %>
-<%= content_tag :li, render_icon_and_text_content('icon-file-alt', t('model.list', model: Article.model_name.human)) %>
+<% content_for :right_page_toolbar do %>
+<%= link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Article.model_name.human)), new_planet_article_path, :class => 'btn btn-inverse') %>
 <% end %>
-
-<% content_for :page_toolbar do %>
-<%= render :partial => 'shared/page_toolbar', :locals => {:content => link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Article.model_name.human)), new_planet_article_path, :class => 'btn btn-inverse')} %>
-<% end %>
-
-<%= render :partial => 'shared/notification' %>
 
 <ul class="nav nav-pills">
   <%= content_tag :li, link_to(t('activerecord.attributes.article.is_scheduled'), 'javascript:void(0);'), class: 'active' if params[:published].nil? %>
