@@ -1,5 +1,5 @@
-<%% content_for :page_toolbar do %>
-<%%= render partial: 'shared/page_toolbar', locals: {content: link_to(render_icon_and_text_content('icon-circle-arrow-left', "#{t('labels.back_to')}#{t('model.list', :model => <%= class_name.split('::').last %>.model_name.human)}"), <%= plural_table_name %>_path, class: 'btn btn-inverse')} %>
+<%% content_for :right_page_toolbar do %>
+<%%= link_to(render_icon_and_text_content('icon-circle-arrow-left', "#{t('labels.back_to')}#{t('model.list', :model => <%= class_name.split('::').last %>.model_name.human)}"), <%= plural_table_name %>_path, class: 'btn btn-inverse') %>
 <%% end %>
 
 <%%= simple_form_for(@<%= singular_table_name %>, :html => {:class => 'form-horizontal' }) do |f| %>

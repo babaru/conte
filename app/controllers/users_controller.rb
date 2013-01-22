@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users_grid = initialize_grid(User)
+    @users_grid = initialize_grid(User, :per_page => 1)
 
     respond_to do |format|
       format.html # index.html.erb

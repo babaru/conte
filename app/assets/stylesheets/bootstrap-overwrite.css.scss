@@ -73,6 +73,16 @@ $tableBackgroundHover: #CCCCCC;
   border-left-width: 0;
 }
 
+.pagination ul > .active > a, .pagination ul > .active > span {
+  @include buttonBackground($btnInverseBackground, $btnInverseBackgroundHighlight);
+}
+
+.pagination ul > li > a:hover, 
+.pagination ul > .active > a, 
+.pagination ul > .active > span {
+  @include buttonBackground($btnInverseBackground, $btnInverseBackgroundHighlight);
+}
+
 .tooltip {
   text-shadow: none;
 }

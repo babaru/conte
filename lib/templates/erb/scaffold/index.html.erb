@@ -1,13 +1,6 @@
-<%% content_for :breadcrumbs do %>
-<%%= render :partial => 'shared/breadcrumbs_default' %>
-<%%= content_tag :li, render_icon_and_text_content('icon-file-alt', t('model.list', model: <%= class_name.split('::').last %>.model_name.human)) %>
+<%% content_for :right_page_toolbar do %>
+<%%= link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => <%= class_name.split('::').last %>.model_name.human)), new_<%= class_name.split('::').last.underscore.downcase %>_path, :class => 'btn btn-inverse') %>
 <%% end %>
-
-<%% content_for :page_toolbar do %>
-<%%= render :partial => 'shared/page_toolbar', :locals => {:content => link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => <%= class_name.split('::').last %>.model_name.human)), new_<%= class_name.split('::').last.underscore.downcase %>_path, :class => 'btn btn-inverse')} %>
-<%% end %>
-
-<%%= render :partial => 'shared/notification' %>
 
 <%%= grid(@<%= class_name.split('::').last.underscore.downcase.pluralize %>_grid, :show_filters => :always) do |g|
 <% attributes.each do |attribute| -%>

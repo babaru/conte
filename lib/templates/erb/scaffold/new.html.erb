@@ -1,7 +1,2 @@
-<%% content_for :breadcrumbs do %>
-<%%= render :partial => 'shared/breadcrumbs_default' %>
-<%%= content_tag :li, render_icon_and_text_content('icon-plus-sign', t('model.create', model: <%= class_name.split('::').last %>.model_name.human)) %>
-<%% end %>
-
 <%%= render 'form' %>
 
