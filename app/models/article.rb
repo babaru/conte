@@ -15,6 +15,7 @@ class Article < ActiveRecord::Base
   validates :scheduled_at, presence: true
   validates :account_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :body, presence: true
+  validates :body, length: {maximum: 140, tokenizer: lambda{|s| s.scan(/{Han}|./)}}
 
   def schedule
     unless self.scheduled_at.nil?

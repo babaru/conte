@@ -1,5 +1,5 @@
 <% if can? :create, Planet %>
-<% content_for :right_page_toolbar do %>
+<% content_for :page_toolbar do %>
 <%= link_to(render_icon_and_text_content('icon-plus-sign', t('model.create', :model => Planet.model_name.human)), new_planet_path, :class => 'btn btn-inverse') %>
 <% end %>
 <% end %>

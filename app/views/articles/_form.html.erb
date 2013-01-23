@@ -2,13 +2,18 @@
 <%= link_to(render_icon_and_text_content('icon-circle-arrow-left', "#{t('labels.back_to')}#{t('model.list', :model => Article.model_name.human)}"), planet_articles_path(@planet), :class => 'btn btn-inverse') %>
 <% end %>
 
+<% content_for :js do %>
+<%= javascript_include_tag "articles" %>
+<% end %>
+
 <%= simple_form_for([@planet, @article], :html => {:class => 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :scheduled_at, :as => :date_time_picker %>
     <%= f.input :account_id, :collection => @planet.accounts.map {|a| [a.name, a.id]} %>
-    <%= f.input :body, :input_html => { :cols => 150, :rows => 5 } %>
+    <%= f.input :body, :input_html => { :cols => 200, :rows => 5 } %>
+    <span class="char_count_alert label">asdfasdfsdaf</span>
     <%= f.input :image %>
     <%= f.input :planet_id, :as => :hidden %>
   </div>

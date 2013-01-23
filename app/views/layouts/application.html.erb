@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= yield :js %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,9 +15,7 @@
         <div id="logo-bg">
           <div id="logo"></div>
         </div>
-        <div id="navigation">
-          <%= render_navigation(level: 1..2, renderer: :navigation_renderer, expand_all: true) %>
-        </div>
+        <%= render_navigation(level: 1..2, renderer: :navigation_renderer) %>
       </div>
       <div id="main" class="span10">
         <div id="header">

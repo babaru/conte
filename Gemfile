@@ -62,3 +62,5 @@ gem 'rufus-scheduler'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'conte_rails_template'
